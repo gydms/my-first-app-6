@@ -16,28 +16,28 @@ from django.urls.base import reverse_lazy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#장고에서 제공하는 로그아웃기능을 사용한 뒤 돌아올 페이지 설정
-#reverse() : 해당 함수를 호출했을 때 즉시 urls 파일을 탐색해 url주소를 찾음
-#reverse_lazy() : 해당 함수를 호출했을 때 웹서버 실행이 준비되면 urls파일을
-#                탐색해 url주소를 찾음
+#�옣怨좎뿉�꽌 �젣怨듯븯�뒗 濡쒓렇�븘�썐湲곕뒫�쓣 �궗�슜�븳 �뮘 �룎�븘�삱 �럹�씠吏� �꽕�젙
+#reverse() : �빐�떦 �븿�닔瑜� �샇異쒗뻽�쓣 �븣 利됱떆 urls �뙆�씪�쓣 �깘�깋�빐 url二쇱냼瑜� 李얠쓬
+#reverse_lazy() : �빐�떦 �븿�닔瑜� �샇異쒗뻽�쓣 �븣 �쎒�꽌踰� �떎�뻾�씠 以�鍮꾨릺硫� urls�뙆�씪�쓣
+#                �깘�깋�빐 url二쇱냼瑜� 李얠쓬
 LOGOUT_REDIRECT_URL = reverse_lazy('vote:index')
-#로그인이 요구되는 기능을 비로그인상태로 접근할때 로그인할수 있는 페이지 설정
+#濡쒓렇�씤�씠 �슂援щ릺�뒗 湲곕뒫�쓣 鍮꾨줈洹몄씤�긽�깭濡� �젒洹쇳븷�븣 濡쒓렇�씤�븷�닔 �엳�뒗 �럹�씠吏� �꽕�젙
 LOGIN_URL = reverse_lazy('customlogin:signin')
-#로그인 뷰로 로그인에 성공했을때, 이동할 URL 경로
+#濡쒓렇�씤 酉곕줈 濡쒓렇�씤�뿉 �꽦怨듯뻽�쓣�븣, �씠�룞�븷 URL 寃쎈줈
 LOGIN_REDIRECT_URL = reverse_lazy('vote:index')
 
-#구글 개발자 사이트에서 발급받은 키와 비밀번호
-#클라이언트 id
+#援ш� 媛쒕컻�옄 �궗�씠�듃�뿉�꽌 諛쒓툒諛쏆� �궎�� 鍮꾨�踰덊샇
+#�겢�씪�씠�뼵�듃 id
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='121296315813-7shm9a7hf6c8cht4637mbnid6q36qf2t.apps.googleusercontent.com'
-#클라이언트 보안비밀
+#�겢�씪�씠�뼵�듃 蹂댁븞鍮꾨�
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET='QGm5Pcmy9WPangaoey7HVQoP'
 
 AUTHENTICATION_BACKENDS=(
-    #구글 인증
+    #援ш� �씤利�
     'social_core.backends.open_id.OpenIdAuth',
     'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
-    #구글 로그인과 프로젝트의 User 모델클래스와 매칭할때 사용
+    #援ш� 濡쒓렇�씤怨� �봽濡쒖젥�듃�쓽 User 紐⑤뜽�겢�옒�뒪�� 留ㅼ묶�븷�븣 �궗�슜
     'django.contrib.auth.backends.ModelBackend'
     )
 
@@ -53,9 +53,9 @@ AUTHENTICATION_BACKENDS=(
 SECRET_KEY = 'u%)@j3aw+tixgs3)=!@(j22tf7fl6p1s77=3ox26ng!utsk+s+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '.pythonanywhrere.com']
 
 
 # Application definition
@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'vote',
     'customlogin',
-    'social_django', #소셜로그인에 대한 어플리케이션
+    'social_django', #�냼�뀥濡쒓렇�씤�뿉 ���븳 �뼱�뵆由ъ��씠�뀡
     'Blog',
 ]
 
@@ -88,7 +88,7 @@ ROOT_URLCONF = 'Django6.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR],#어떤 폴더에 HTML파일을 저장할지 설정
+        'DIRS': [BASE_DIR],#�뼱�뼡 �뤃�뜑�뿉 HTML�뙆�씪�쓣 ���옣�븷吏� �꽕�젙
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -155,11 +155,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#파이썬 코드에서 파일을 접근할 때의 루트경로
+#�뙆�씠�뜫 肄붾뱶�뿉�꽌 �뙆�씪�쓣 �젒洹쇳븷 �븣�쓽 猷⑦듃寃쎈줈
 MEDIA_URL ='/uploads/'
-#파일이 실제로 저장되는 루트경로
-#BASE_DIR : 프로젝트가 생성된 위치
-#os.path.join(경로,경로) : 두 폴더경로를 붙여줌
+#�뙆�씪�씠 �떎�젣濡� ���옣�릺�뒗 猷⑦듃寃쎈줈
+#BASE_DIR : �봽濡쒖젥�듃媛� �깮�꽦�맂 �쐞移�
+#os.path.join(寃쎈줈,寃쎈줈) : �몢 �뤃�뜑寃쎈줈瑜� 遺숈뿬以�
 MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
 
 
